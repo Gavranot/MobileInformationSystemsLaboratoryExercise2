@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api_services.dart';
 import 'jokes_screen.dart';
+import 'favorites_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -36,15 +37,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         title: Text('Joke Types', style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: Colors.white)),
         actions: [
           IconButton(
-            icon: Icon(Icons.lightbulb),
-            onPressed: () async {
-              final randomJoke = await ApiService.fetchRandomJoke();
-              showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: Text(randomJoke['setup'], style: Theme.of(context).textTheme.headlineLarge),
-                  content: Text(randomJoke['punchline'], style: Theme.of(context).textTheme.bodyLarge),
-                ),
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavoritesScreen()),
               );
             },
           ),
